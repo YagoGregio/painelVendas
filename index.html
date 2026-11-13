@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Painel de Vendas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div>
+        <h1>Painel de Vendas</h1>
+        <p>Cadastro de pedidos, frete por região e faturamento.</p>
+      </div>
+      <span id="status" class="chip"><i></i><span>Conectando…</span></span>
+    </header>
+
+    <div class="layout">
+      <section class="panel form-panel" aria-labelledby="t-form">
+        <h2 id="t-form">Nova venda</h2>
+        <p class="sub">O frete é cobrado por unidade, conforme a região do estado.</p>
+        <form id="f" novalidate>
+          <div class="row2">
+            <label>Pedido<input id="f-pedido" readonly></label>
+            <label>Data<input id="f-data" type="date" required></label>
+          </div>
+          <label>Produto<select id="f-produto" required></select></label>
+          <div class="row2">
+            <label>Estado<select id="f-estado" required></select></label>
+            <label>Quantidade<input id="f-qtd" type="number" min="1" step="1" inputmode="numeric" value="1" required></label>
+          </div>
+          <dl class="calc" id="calc" aria-live="polite"></dl>
+          <button class="btn" id="f-ok" type="submit">Registrar venda</button>
+          <p class="msg" id="msg" role="status"></p>
+        </form>
+      </section>
+
+      <main>
+        <div class="kpis" id="kpis"></div>
+        <div class="charts">
+          <section class="panel"><h2>Vendas por região</h2><div id="reg" class="bars"></div></section>
+          <section class="panel"><h2>Produtos mais vendidos</h2><div id="prod" class="bars"></div></section>
+        </div>
+        <section class="panel">
+          <div class="tools">
+            <h2>Vendas registradas <span id="count" class="tag"></span></h2>
+            <div class="filters">
+              <label>Região<select id="flt-reg"></select></label>
+              <label>Produto<select id="flt-prod"></select></label>
+            </div>
+          </div>
+          <div class="tablewrap">
+            <table>
+              <thead>
+                <tr>
+                  <th class="num">Pedido</th><th>Data</th><th>Região</th><th>Produto</th>
+                  <th class="num">Qtd</th><th class="num">Valor unit.</th><th class="num">Frete</th><th class="num">Total</th><th></th>
+                </tr>
+              </thead>
+              <tbody id="rows"></tbody>
+            </table>
+          </div>
+          <p class="foot">Total = quantidade × (valor unitário + frete por unidade). Cada venda é gravada em vendas.xlsx.</p>
+        </section>
+      </main>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
